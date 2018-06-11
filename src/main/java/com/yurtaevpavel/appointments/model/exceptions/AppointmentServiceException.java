@@ -1,12 +1,12 @@
 package com.yurtaevpavel.appointments.model.exceptions;
 
-public class ServiceException extends Exception {
+public class AppointmentServiceException extends RuntimeException {
 
-    public ServiceException() {
+    public AppointmentServiceException() {
         super();
     }
 
-    public ServiceException(String message) {
+    public AppointmentServiceException(String message) {
         super(message);
     }
 }
