@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 @Entity
 public class Person implements Serializable {
-
     private Long id;
     private String firstName;
     private String lastName;
