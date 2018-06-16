@@ -3,6 +3,6 @@ export const initialState = {
     appointmentInfo: null,
     modalVisible: false,
     currentPage: 0,
-    rowsOnPage: 5
+    rowsOnPage: 3
 };
 // TODO

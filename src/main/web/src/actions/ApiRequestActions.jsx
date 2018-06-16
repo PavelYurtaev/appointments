@@ -1,8 +1,8 @@
-import callApi from "../utils/Request";
+import { callApi, callApiNoReturn }from "../utils/Request";
 
 
-export const saveNote = (noteRequest) => {
-    return callApi('savenote/' + noteRequest.id, 'POST', noteRequest.note)
+export const saveNote = noteObj => {
+    return callApiNoReturn('savenote/' + noteObj.appointmentId, 'POST', noteObj)
 };
 
 export const getAppointments = () => {

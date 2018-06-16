@@ -9,22 +9,19 @@ class App extends Component {
   render() {
     return (
         <div>
-
-                <Button variant="fab" color="primary" aria-label="add" >
-                    <AddIcon />
-                </Button>
-                <Button variant="contained" color="default">
-                    CSV
-                    <FileDownload />
-                </Button>
-
-
+            <Button variant="fab" color="primary" aria-label="add" >
+                <AddIcon />
+            </Button>
+            <Button variant="contained" color="default">
+                CSV
+                <FileDownload />
+            </Button>
             <CustomTable />
            <br/>
-          Confirmed: // TODO change style for confirmed appointments
-            <CustomTable />
+          Confirmed:
+            {/*<CustomTable />*/}
         </div>
-
+// TODO change style for confirmed appointments
     );
   }
 }
