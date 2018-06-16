@@ -1,29 +1,33 @@
-import 'whatwg-fetch'
+let apiUrl = path => {
+    return 'http://127.0.0.1:8080/' + path;
+};
 
-const callApi = (path, method, request) => {
-
-    let apiUrl = (path) => {
-        return 'http://127.0.0.1:8080/' + path;
-    };
-
-    let fetchData = {
+let fetchData = (method, request) => {
+    return {
         method: method,
         body: JSON.stringify(request),
-        mode: 'no-cors',
+        // mode: 'no-cors',
         headers: {
-            'contentType': 'application/json',
-            'responseType': 'json',
-            'accept': 'application/json',
-
-            // 'Accept': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
         }
     };
+};
 
-    return fetch(apiUrl(path), fetchData)
+export const callApi = (path, method, request) => {
+    return fetch(apiUrl(path), fetchData(method, request))
         .then(response => response.json())
-        .catch(error => {alert('Failed api call url: ' + apiUrl(path) + ' ' + error.message); // TODO
+        .catch(error => {
+            alert('Failed api call url: ' + apiUrl(path) + ' ' + error.message); // TODO
             throw error;
         });
 };
 
-export default callApi;
+export const callApiNoReturn = (path, method, request) => {
+    return fetch(apiUrl(path), fetchData(method, request))
+        .catch(error => {
+            alert('Failed api call url: ' + apiUrl(path) + ' ' + error.message); // TODO
+            throw error;
+        });
+};
+
