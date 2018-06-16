@@ -57,16 +57,17 @@ class CustomTable extends React.Component {
 
     render() {
         const { appointments, rowsOnPage, currentPage, classes} = this.props;
-
-        const emptyRows = rowsOnPage - Math.min(rowsOnPage, currentPage * rowsOnPage); // вернуть ResponseEntity
+        // const emptyRows = rowsOnPage - Math.min(rowsOnPage, currentPage * rowsOnPage);
 
         const CustomTableCell = withStyles(theme => ({
             head: {
                 backgroundColor: theme.palette.common.black,
                 color: theme.palette.common.white,
+                align: 'left'
             },
             body: {
                 fontSize: 14,
+                align: 'left'
             },
         }))(TableCell);
 
@@ -80,28 +81,30 @@ class CustomTable extends React.Component {
                                 <CustomTableCell>Date</CustomTableCell>
                                 <CustomTableCell>Company</CustomTableCell>
                                 <CustomTableCell>Contact person</CustomTableCell>
+                                <CustomTableCell>Note</CustomTableCell>
                                 <CustomTableCell>Status</CustomTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {appointments.slice(currentPage * rowsOnPage, currentPage * rowsOnPage + rowsOnPage).map(app => {
                                 return (
-                                        // TODO
+                                        // TODO validate json
                                         <TableRow key={app.id} >
-                                            <TableCell style={{width: 30}}><AppointmentModal /></TableCell>
-                                            <TableCell >{app.date}</TableCell>
-                                            <TableCell component="th" scope="row">{app.name / app.url}</TableCell>
-                                            <TableCell numeric>{app.status}</TableCell> {/*{contact person}//*/}
+                                            <TableCell style={{width: 30}}><AppointmentModal appointment={app} onUpdate={() => this.forceUpdate()}/></TableCell>
+                                            <TableCell>{app.date}</TableCell>
+                                            <TableCell>{app.company.name + '/' + app.company.url}</TableCell>
+                                            <TableCell numeric>{app.company.contactPerson.firstName + ' ' + app.company.contactPerson.firstName}</TableCell>
+                                            <TableCell numeric>{app.note}</TableCell>
                                             <TableCell numeric>{app.status}</TableCell>
                                         </TableRow>
 
                                 );
                             })}
-                            {emptyRows > 0 && (
-                                <TableRow style={{ height: 48 * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
+                            {/*{emptyRows > 0 && (*/}
+                                {/*<TableRow style={{ height: 48 * emptyRows }}>*/}
+                                    {/*<TableCell colSpan={6} />*/}
+                                {/*</TableRow>*/}
+                            {/*)}*/}
                         </TableBody>
                         <TableFooter>
                             <TableRow>
@@ -128,17 +131,17 @@ CustomTable.propTypes = {
 
 const mapStateToProps = (state) => {
      return {
-        appointments: state.appointments,
-         currentPage: state.currentPage,
-         rowsOnPage: state.rowsOnPage
+        appointments: state.AppointmentsReducer.appointments,
+         currentPage: state.AppointmentsReducer.currentPage,
+         rowsOnPage: state.AppointmentsReducer.rowsOnPage
      }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onGetAppointments: () => {
-            getAppointments().then((response) => {
-                    dispatch(fillAppointments(response.content));
+            getAppointments().then(response => {
+               dispatch(fillAppointments(response));
             }).catch(error => {
                 alert('Error ' + error.message);
             });
