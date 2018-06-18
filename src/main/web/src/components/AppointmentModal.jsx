@@ -79,7 +79,7 @@ class SimpleModal extends React.Component {
                             />
                             <Button onClick={this.onSaveNote()} variant="outlined" color="primary">Save</Button>
                         </div>
-                        <ButtonGroup />
+                        <ButtonGroup appointment={this.props.appointment}/>
                     </div>
                 </Modal>
             </div>

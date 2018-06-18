@@ -14,15 +14,15 @@ export const getAppointment = (id) => {
 };
 
 export const confirmAppointment = (id) => {
-    return callApi('confirm/' + id, 'GET');
+    return callApiNoReturn('confirm/' + id, 'GET');
 };
 
 export const cancelAppointment = (id) => {
-    return callApi('cancel/' + id, 'GET');
+    return callApiNoReturn('cancel/' + id, 'GET');
 };
 
 export const deleteAppointment = (id) => {
-    return callApi('delete/' + id, 'DELETE');
+    return callApiNoReturn('delete/' + id, 'DELETE');
 };
 
 export const saveAppointment = (appointmentRequest) => {

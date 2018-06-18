@@ -30,8 +30,12 @@ public class AppointmentService {
     }
 
     public void deleteAppointment(Long id) {
+        if (!appointmentRepository.existsById(id)) {
+            throw new AppointmentServiceException(
+                    String.format("Appointment with id=%s does not exist", id));
+        }
         appointmentRepository.deleteById(id);
-    } // TODO exception handling
+    }
 
     public Appointment getAppointmentById(Long id) {
         return getAppointmentOrException(id);
