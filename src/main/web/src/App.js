@@ -4,6 +4,7 @@ import CustomTable from './components/CustomTable';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import FileDownload from '@material-ui/icons/FileDownload';
+import { apiUrl } from "./utils/Request";
 
 class App extends Component {
   render() {
@@ -12,7 +13,8 @@ class App extends Component {
             <Button variant="fab" color="primary" aria-label="add" >
                 <AddIcon />
             </Button>
-            <Button variant="contained" color="default">
+            &ensp;
+            <Button variant="contained" color="default" href={apiUrl('csv')}>
                 CSV
                 <FileDownload />
             </Button>
